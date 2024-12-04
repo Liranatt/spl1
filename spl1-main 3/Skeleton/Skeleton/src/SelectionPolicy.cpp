@@ -5,7 +5,7 @@
 #include "../include/SelectionPolicy.h"
 using std::string;
 using std::vector;
-#include <bits/stdc++.h>
+
 using namespace std;
 
     NaiveSelection::NaiveSelection():
@@ -17,9 +17,11 @@ using namespace std;
     }
 
     const string NaiveSelection::toString() const{
-        return "Selection Policy: nve";        
+        return "nve";        
     }
-    NaiveSelection *clone() const;
+    NaiveSelection *NaiveSelection::clone() const{
+        return new NaiveSelection(*this);
+    }
 
     BalancedSelection::BalancedSelection(int LifeQualityScore, int EconomyScore, int EnvironmentScore):
     LifeQualityScore(LifeQualityScore), EconomyScore(EconomyScore),
@@ -49,9 +51,11 @@ using namespace std;
             return facilitiesOptions[retind];   
         }
         const string BalancedSelection::toString() const{
-            return "SelectionPolicy: bal";
+            return "bal";
         }
-        BalancedSelection *clone() const override;
+        BalancedSelection *BalancedSelection::clone() const {
+            return new BalancedSelection(*this);
+        }
 
         EconomySelection::EconomySelection() {};
 
@@ -64,9 +68,11 @@ using namespace std;
             }
         }
         const string EconomySelection::toString() const{
-            return "selectionPolicy: eco";
+            return "eco";
         }
-        EconomySelection *clone() const override;
+        EconomySelection *EconomySelection::clone() const {
+            return new EconomySelection(*this);
+        }
 
         SustainabilitySelection::SustainabilitySelection(): lastSelectedIndex(-1) {};
         const FacilityType& SustainabilitySelection::selectFacility(const vector<FacilityType>& facilitiesOptions) {
@@ -78,7 +84,9 @@ using namespace std;
             }
         }
         const string SustainabilitySelection::toString() const{
-            return "SelectionPolicy: env";
+            return "env";
         }
-        SustainabilitySelection *clone() const ;
-        // אחר כך ze bishvil haataka habackup
+        SustainabilitySelection *SustainabilitySelection::clone() const{
+           return new SustainabilitySelection(*this);
+        } 
+       

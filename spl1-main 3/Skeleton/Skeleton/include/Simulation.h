@@ -9,10 +9,14 @@ using std::vector;
 
 class BaseAction;
 class SelectionPolicy;
-
+extern Simulation* backup;
 class Simulation {
     public:
         Simulation(const string &configFilePath);
+        Simulation(const Simulation &other);  
+        Simulation& operator=(const Simulation& other);
+        Simulation(Simulation&& other) noexcept;
+        Simulation& Simulation::operator=(Simulation&& other) noexcept;
         void start();
         void addPlan(const Settlement &settlement, SelectionPolicy *selectionPolicy);
         void addAction(BaseAction *action);
@@ -24,8 +28,11 @@ class Simulation {
         Plan &getPlan(const int planID);
         void step();
         void close();
+        void clearData();
         void open();
         void SprintActionLog();
+        string stringActionLog();
+        void parse(const string &configFilePath);
 
     private:
         bool isRunning;

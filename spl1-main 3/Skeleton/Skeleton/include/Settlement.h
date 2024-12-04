@@ -14,6 +14,7 @@ enum class SettlementType {
 
 class Settlement {
     public:
+        Settlement();
         Settlement(const string &name, SettlementType type);
         const string &getName() const;
         SettlementType getType() const;
